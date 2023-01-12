@@ -7,9 +7,8 @@ module.exports = {
     ...theme,
     // Overriding fontFamily to use @next/font loaded families
     fontFamily: {
-      mono: 'var(--font-mono)',
-      sans: 'var(--font-sans)',
-      serif: 'var(--font-serif)',
+      blinker: 'var(--font-blinker)',
+      roboto: 'var(--font-roboto)',
     },
   },
   plugins: [require('@tailwindcss/typography')],

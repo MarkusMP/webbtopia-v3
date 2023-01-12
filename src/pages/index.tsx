@@ -28,8 +28,6 @@ interface PreviewData {
 export const getStaticProps: GetStaticProps<PageProps, Query, PreviewData> = async (ctx) => {
   const {preview = false, previewData = {}, locale} = ctx
 
-  console.log(locale)
-
   const params = {slug: '/', language: locale === 'en' ? 'en' : 'sv'}
 
   if (preview && previewData.token) {
