@@ -33,12 +33,23 @@ export const homePageType = defineType({
       return `/api/sanity/preview?type=${type}&id=${id}&slug=${currentSlug}&secret=${secret}`
     },
   },
-
+  fieldsets: [
+    {
+      title: 'SEO',
+      name: 'seo',
+      options: {
+        collapsible: true,
+        collapsed: false,
+      },
+    },
+  ],
   fields: [
     defineField({
       type: 'string',
       name: 'title',
-      title: 'Title',
+      title: 'Title for menu & links',
+      description:
+        'just make sure you add a descriptive name which will make it easy to find this page later when adding link & browsing the CMS. Example (About us).',
     }),
     defineField({
       name: 'language',
@@ -51,6 +62,24 @@ export const homePageType = defineType({
       name: 'content',
       title: 'Content',
       of: [defineArrayMember({type: 'pageElement'})],
+    }),
+    defineField({
+      title: 'Title for SEO',
+      description:
+        'make it as enticing as possible to convert users in social feeds and google searches. Ideally between 15 and 70 characters.',
+      name: 'titleSEO',
+      fieldset: 'seo',
+      type: 'string',
+      validation: (rule) => rule.max(70).warning(`A title shouldn't be more than 70 characters.`),
+    }),
+    defineField({
+      name: 'descriptionSEO',
+      type: 'string',
+      title: 'Short paragraph for SEO (meta description)',
+      description: 'Ideally between 70 and 160 characters',
+      fieldset: 'seo',
+      validation: (Rule) =>
+        Rule.max(160).warning(`A description shouldn't be more than 160 characters.`),
     }),
   ],
 })

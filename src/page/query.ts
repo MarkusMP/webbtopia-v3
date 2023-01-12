@@ -5,6 +5,9 @@ export const PAGE_DATA_QUERY = groq`
     title,
     slug,
     language,
+    indexPage,
+    descriptionSEO,
+    titleSEO,
     content[]{
       _key,
       _type == 'pageElement' => {
@@ -23,6 +26,8 @@ export const HOME_PAGE_DATA_QUERY = groq`
     title,
     slug,
     language,
+    descriptionSEO,
+    titleSEO,
     content[]{
       _key,
       _type == 'pageElement' => {
@@ -40,6 +45,8 @@ export const NOT_FOUND_PAGE_DATA_QUERY = groq`
   *[_type == 'notFound' && language == $language][0]{
     title,
     slug,
+    descriptionSEO,
+    titleSEO,
     content[]{
       _key,
       _type == 'pageElement' => {
