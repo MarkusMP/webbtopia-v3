@@ -13,7 +13,7 @@ export default function Document() {
           rel="stylesheet"
         />
       </Head>
-      <body className="bg-background text-dark">
+      <body className="bg-background bg-[url(/images/dots.svg)] bg-repeat text-dark">
         <Main />
         <NextScript />
       </body>
