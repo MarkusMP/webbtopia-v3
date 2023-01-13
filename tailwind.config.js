@@ -5,11 +5,6 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     ...theme,
-    // Overriding fontFamily to use @next/font loaded families
-    fontFamily: {
-      blinker: 'var(--font-blinker)',
-      roboto: 'var(--font-roboto)',
-    },
   },
   theme: {
     colors: {

@@ -11,4 +11,9 @@ body,
 body {
   -webkit-font-smoothing: antialiased;
   margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.blinker {
+  font-family: 'Blinker', sans-serif !important;
 }
