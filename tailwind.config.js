@@ -11,5 +11,16 @@ module.exports = {
       roboto: 'var(--font-roboto)',
     },
   },
+  theme: {
+    colors: {
+      transparent: 'transparent',
+      primary: '#31AFF4',
+      secondary: '#262C41',
+      dark: '#1E1E1E',
+      white: '#ffffff',
+      background: '#F9FAFB',
+      gray: '#585858',
+    },
+  },
   plugins: [require('@tailwindcss/typography')],
 }
