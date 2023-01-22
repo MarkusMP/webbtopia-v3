@@ -1,16 +1,25 @@
 import React from 'react'
 
+import {FooterPayload, HeaderPayload} from '../../page/types'
 import Footer from './Footer'
 import Header from './Header'
 
-const Layout = ({children}: {children: React.ReactNode}) => {
+const Layout = ({
+  children,
+  header,
+  footer,
+}: {
+  children: React.ReactNode
+  header: HeaderPayload
+  footer: FooterPayload
+}) => {
   return (
     <>
-      <Header />
+      <Header data={header} />
       <div className="flex flex-col">
         <main className="flex-grow">{children}</main>
       </div>
-      <Footer />
+      <Footer data={footer} />
     </>
   )
 }

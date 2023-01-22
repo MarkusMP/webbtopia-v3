@@ -1,6 +1,7 @@
+import {documentInternationalization} from '@sanity/document-internationalization'
 import {visionTool} from '@sanity/vision'
 import {Config, defineConfig} from 'sanity'
-import {documentInternationalization} from '@sanity/document-internationalization'
+import {media} from 'sanity-plugin-media'
 
 import {dataset, projectId} from './src/sanity/env'
 import {deskTool} from './src/sanity/lib/desk'
@@ -11,11 +12,12 @@ export default defineConfig<Config>({
   dataset,
   projectId,
   schema,
-  title: 'Next.js Template',
+  title: 'Webbtopia',
 
   plugins: [
     deskTool(),
     visionTool(),
+    media(),
     documentInternationalization({
       // Required, either:
       // An array of supported languages
@@ -24,7 +26,7 @@ export default defineConfig<Config>({
         {id: 'en', title: 'English'},
       ],
       // Required
-      schemaTypes: ['home', 'page', 'notFound'],
+      schemaTypes: ['home', 'page', 'notFound', 'header', 'footer', 'work'],
     }),
   ],
 })

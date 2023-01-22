@@ -1,5 +1,5 @@
 import {WarningOutlineIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType, isRecord, isString} from 'sanity'
+import {defineField, defineType, isRecord, isString} from 'sanity'
 
 import {apiVersion, previewSecretId} from '../env'
 import {getSecret} from '../secret'
@@ -59,10 +59,10 @@ export const notFoundPageType = defineType({
       hidden: true,
     }),
     defineField({
-      type: 'array',
       name: 'content',
-      title: 'Content',
-      of: [defineArrayMember({type: 'pageElement'})],
+      type: 'array',
+      title: 'Page sections',
+      of: [{type: 'notFoundSection'}],
     }),
     defineField({
       title: 'Title for SEO',

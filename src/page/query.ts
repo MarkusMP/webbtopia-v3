@@ -9,14 +9,19 @@ export const PAGE_DATA_QUERY = groq`
     descriptionSEO,
     titleSEO,
     content[]{
-      _key,
-      _type == 'pageElement' => {
-        ...article->{
-          _type,
-          supertitle,
-          title,
-          subtitle
-        }
+      ...,
+      link-> {
+        "slug": slug.current,
+        language
+      },
+      workItemList[]-> {
+       _id,
+        description,
+        image,
+        title,
+        link-> {
+        "slug": slug.current,
+        },
       }
     }
   }
@@ -29,14 +34,19 @@ export const HOME_PAGE_DATA_QUERY = groq`
     descriptionSEO,
     titleSEO,
     content[]{
-      _key,
-      _type == 'pageElement' => {
-        ...article->{
-          _type,
-          supertitle,
-          title,
-          subtitle
-        }
+      ...,
+      link-> {
+        "slug": slug.current,
+        language
+      },
+      workItemList[]-> {
+       _id,
+        description,
+        image,
+        title,
+        link-> {
+        "slug": slug.current,
+        },
       }
     }
   }
@@ -48,14 +58,19 @@ export const NOT_FOUND_PAGE_DATA_QUERY = groq`
     descriptionSEO,
     titleSEO,
     content[]{
-      _key,
-      _type == 'pageElement' => {
-        ...article->{
-          _type,
-          supertitle,
-          title,
-          subtitle
-        }
+      ...,
+      link-> {
+        "slug": slug.current,
+        language
+      },
+      workItemList[]-> {
+       _id,
+        description,
+        image,
+        title,
+        link-> {
+        "slug": slug.current,
+        },
       }
     }
   }
@@ -65,5 +80,49 @@ export const PAGE_PATHS_QUERY = groq`
   *[_type == 'page' && defined(slug.current)]{
     'slug': slug.current,
     language
+  }
+`
+export const HEADER_QUERY = groq`
+ *[_type == 'header' && language == $language][0]{
+  btnText,
+    image,
+    link-> {
+      "slug": slug.current,
+      language
+    },
+    menuItems[] -> {
+      _id,
+      _type,
+      "slug": slug.current,
+      title,
+      linkItems[] {
+        _key,
+        title,
+        image,
+        dropDownMenuItems[] -> {
+          "slug": slug.current,
+          title,
+          _id,
+        }
+      }
+    }
+  }
+`
+export const FOOTER_QUERY = groq`
+*[_type == 'footer' && language == $language][0]{
+  emailText,
+    image,
+    socialTitle,
+    social[],
+      menuItems[] -> {
+      _id,
+      title,
+      menuItems[] -> {
+       _id,
+      _type,
+      "slug": slug.current,
+      title,
+      }
+      }
   }
 `

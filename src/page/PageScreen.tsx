@@ -1,27 +1,24 @@
 import Layout from '../components/global/Layout'
 import {SiteMeta} from '../components/global/SiteMeta'
-import {PageData} from './types'
+import RenderSections from '../components/RenderSections'
+import {FooterPayload, HeaderPayload, PageData} from './types'
 
-export function PageScreen(props: {data: PageData | null}) {
-  const {data} = props
+export function PageScreen(props: {
+  data: PageData | null
+  header: HeaderPayload
+  footer: FooterPayload
+}) {
+  const {data, header, footer} = props
 
   return (
     <>
       <SiteMeta
         noIndex={!data?.indexPage ? false : data?.indexPage && true}
-        title={data?.title}
+        title={data?.titleSEO}
         description={data?.descriptionSEO}
       />
-      <Layout>
-        <div className="p-5">
-          {/* <h1>{data?.title && data.title}</h1> */}
-          <div className="m-auto max-w-xl">
-            <div className="prose dark:prose-invert">
-              <h1 className="text-xl font-extrabold tracking-tight text-primary">{data?.title}</h1>
-              <pre>{JSON.stringify(data, null, 2)}</pre>
-            </div>
-          </div>
-        </div>
+      <Layout header={header} footer={footer}>
+        {data?.content && <RenderSections sections={data.content} />}
       </Layout>
     </>
   )

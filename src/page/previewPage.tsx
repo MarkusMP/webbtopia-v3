@@ -1,6 +1,12 @@
 import {usePreview} from '../sanity/preview'
 import {PageScreen} from './PageScreen'
-import {HOME_PAGE_DATA_QUERY, NOT_FOUND_PAGE_DATA_QUERY, PAGE_DATA_QUERY} from './query'
+import {
+  FOOTER_QUERY,
+  HEADER_QUERY,
+  HOME_PAGE_DATA_QUERY,
+  NOT_FOUND_PAGE_DATA_QUERY,
+  PAGE_DATA_QUERY,
+} from './query'
 
 export default function PreviewPage(props: {
   slug: string | null
@@ -23,6 +29,12 @@ export default function PreviewPage(props: {
           language: locale,
         }
       )}
+      header={usePreview(token, HEADER_QUERY, {
+        language: locale,
+      })}
+      footer={usePreview(token, FOOTER_QUERY, {
+        language: locale,
+      })}
     />
   )
 }
