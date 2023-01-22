@@ -6,7 +6,7 @@ import WorkItem from '../shared/WorkItem'
 
 const WorkList = ({descriptionTwo, btnText, description, link, title, workItemList}: IWorkList) => {
   return (
-    <section className="mx-auto flex items-center px-8 py-8 xl:container">
+    <section className="mx-auto flex items-center px-8 py-12 xl:container">
       <div className="flex flex-col lg:flex-row">
         <div className="w-full pb-8 lg:w-2/4 lg:pr-4">
           <h2 className="blinker text-4xl tracking-wider">{title && title}</h2>

@@ -111,3 +111,17 @@ export interface IWorkListItem {
   _id?: string
   title?: string
 }
+
+export interface IServicesList {
+  title?: string
+  description?: string
+  _key?: string
+  _type?: string
+  servicesItemList: IServicesListItem[]
+}
+
+export interface IServicesListItem {
+  title?: string
+  _key?: string
+  link?: {slug: string}
+}

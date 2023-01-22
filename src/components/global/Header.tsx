@@ -39,8 +39,8 @@ const Header = ({data}: {data: HeaderPayload}) => {
     <header
       className={
         navbar
-          ? `fixed mb-[80px] h-[80px] w-full bg-white bg-opacity-100 transition-opacity group-hover:bg-white`
-          : `fixed mb-[80px] h-[80px] w-full bg-white ${
+          ? `fixed z-[10] mb-[80px] h-[80px] w-full bg-white bg-opacity-100 transition-opacity group-hover:bg-white`
+          : `fixed z-[10] mb-[80px] h-[80px] w-full bg-white ${
               open
                 ? `${background ? 'bg-opacity-100' : 'bg-opacity-100 lg:bg-opacity-0'}`
                 : `${background ? 'bg-opacity-100' : 'bg-opacity-0'}`

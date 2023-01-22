@@ -11,7 +11,7 @@ export const PAGE_DATA_QUERY = groq`
     content[]{
       ...,
       link-> {
-        "slug": slug.current,
+          "slug": slug.current,
         language
       },
       workItemList[]-> {
@@ -20,7 +20,14 @@ export const PAGE_DATA_QUERY = groq`
         image,
         title,
         link-> {
-        "slug": slug.current,
+          "slug": slug.current,
+        },
+      },
+      servicesItemList[] {
+        _key,
+        title,
+        link-> {
+          "slug": slug.current,
         },
       }
     }
@@ -36,7 +43,7 @@ export const HOME_PAGE_DATA_QUERY = groq`
     content[]{
       ...,
       link-> {
-        "slug": slug.current,
+          "slug": slug.current,
         language
       },
       workItemList[]-> {
@@ -45,7 +52,14 @@ export const HOME_PAGE_DATA_QUERY = groq`
         image,
         title,
         link-> {
-        "slug": slug.current,
+          "slug": slug.current,
+        },
+      },
+      servicesItemList[] {
+        _key,
+        title,
+        link-> {
+          "slug": slug.current,
         },
       }
     }
@@ -69,7 +83,7 @@ export const NOT_FOUND_PAGE_DATA_QUERY = groq`
         image,
         title,
         link-> {
-        "slug": slug.current,
+          "slug": slug.current,
         },
       }
     }

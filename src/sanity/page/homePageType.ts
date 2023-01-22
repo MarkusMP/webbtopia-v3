@@ -61,7 +61,7 @@ export const homePageType = defineType({
       name: 'content',
       type: 'array',
       title: 'Page sections',
-      of: [{type: 'hero'}, {type: 'workList'}],
+      of: [{type: 'hero'}, {type: 'workList'}, {type: 'servicesList'}],
     }),
     defineField({
       title: 'Title for SEO',
