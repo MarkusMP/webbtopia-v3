@@ -14,8 +14,6 @@ const handler: NextApiHandler = async function preview(req, res) {
 
   const {query} = req
 
-  console.log({preview: query})
-
   const secret = isString(query.secret) ? query.secret : undefined
   const type = isString(query.type) ? query.type : undefined
   const slug = isString(query.slug) ? query.slug : undefined
@@ -61,6 +59,14 @@ const handler: NextApiHandler = async function preview(req, res) {
   } else if (type === 'home' && language === 'sv') {
     res.setPreviewData({token: readToken})
     res.writeHead(307, {Location: `/sv`})
+    res.end()
+  } else if (type === 'blog' && language === 'en') {
+    res.setPreviewData({token: readToken})
+    res.writeHead(307, {Location: `/blog/${slug}`})
+    res.end()
+  } else if (type === 'blog' && language === 'sv') {
+    res.setPreviewData({token: readToken})
+    res.writeHead(307, {Location: `/sv/blogg/${slug}`})
     res.end()
   } else {
     res.setPreviewData({token: readToken})

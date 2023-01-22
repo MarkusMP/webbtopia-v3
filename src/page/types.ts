@@ -24,6 +24,16 @@ export interface PageData {
   _type?: string
   content?: any[]
 }
+export interface PageBlogData {
+  title?: string
+  slug?: {current?: string}
+  titleSEO?: string
+  descriptionSEO?: string
+  indexPage?: boolean
+  _type?: string
+  body?: any[]
+  image?: Image
+}
 
 export interface HeroPayload {
   image?: Image
@@ -124,4 +134,33 @@ export interface IServicesListItem {
   title?: string
   _key?: string
   link?: {slug: string}
+}
+
+export interface IFeature {
+  title?: string
+  btnText?: string
+  link?: {slug: string}
+  image?: Image
+  featureItemList?: IFeatureItem[]
+}
+
+export interface IFeatureItem {
+  _key?: string
+  title?: string
+}
+
+export interface IBlogListPreview {
+  title?: string
+  subTitle?: string
+  description?: string
+  btnText?: string
+  link?: {slug: string}
+  blogListPreview?: IBlogListPreviewItem[]
+}
+export interface IBlogListPreviewItem {
+  title?: string
+  description?: string
+  slug?: string
+  _id?: string
+  image?: Image
 }

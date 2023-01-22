@@ -53,7 +53,7 @@ const DropDown = ({
                   {item.dropDownMenuItems?.map((item: HeaderDropDownMenuItemsPayload) => (
                     <li key={item._id} className="py-2">
                       <Link
-                        href={item.slug}
+                        href={`/${item.slug}`}
                         className="text-gray transition-colors hover:text-primary"
                       >
                         {item.title && item.title}

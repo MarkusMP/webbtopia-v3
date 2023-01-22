@@ -1,15 +1,15 @@
-import {HomeIcon} from '@sanity/icons'
+import {BlockContentIcon} from '@sanity/icons'
 import {defineField, defineType, isRecord, isString} from 'sanity'
 
 import {apiVersion, previewSecretId} from '../env'
 import {getSecret} from '../secret'
 import {PagePreview} from './PagePreview'
 
-export const homePageType = defineType({
+export const blogPageType = defineType({
   type: 'document',
-  name: 'home',
-  title: 'Home',
-  icon: HomeIcon,
+  name: 'blog',
+  title: 'Blog',
+  icon: BlockContentIcon,
 
   options: {
     views(S) {
@@ -47,9 +47,18 @@ export const homePageType = defineType({
     defineField({
       type: 'string',
       name: 'title',
-      title: 'Title for menu & links',
-      description:
-        'just make sure you add a descriptive name which will make it easy to find this page later when adding link & browsing the CMS. Example (About us).',
+      title: 'Title',
+    }),
+    defineField({
+      type: 'slug',
+      name: 'slug',
+      title: 'Relative address on the website',
+      description: 'Defines the URL of the page in the website. Example (test)',
+      options: {
+        source: 'title',
+        maxLength: 200, // will be ignored if slugify is set
+        slugify: (input) => input.toLowerCase().replace(/\s+/g, '-').slice(0, 200),
+      },
     }),
     defineField({
       name: 'language',
@@ -58,17 +67,48 @@ export const homePageType = defineType({
       hidden: true,
     }),
     defineField({
-      name: 'content',
+      title: 'Unlisted',
+      description: 'If unlisted is true then it wont show on up google search.',
+      name: 'indexPage',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'categories',
+      title: 'Categories',
       type: 'array',
-      title: 'Page sections',
-      of: [
-        {type: 'hero'},
-        {type: 'workList'},
-        {type: 'servicesList'},
-        {type: 'feature'},
-        {type: 'blogListPreview'},
+      of: [{type: 'reference', to: {type: 'category'}}],
+    }),
+    defineField({
+      name: 'publishedAt',
+      title: 'Published at',
+      type: 'datetime',
+    }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'string',
+    }),
+    defineField({
+      title: 'Image',
+      description: 'Upload image here.',
+      name: 'image',
+      type: 'image',
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+          description: 'Important for SEO and accessiblity.',
+        },
       ],
     }),
+    defineField({
+      name: 'body',
+      title: 'Body',
+      type: 'blockContent',
+    }),
+
     defineField({
       title: 'Title for SEO',
       description:

@@ -18,7 +18,7 @@ const Hero = ({btnText, description, image, link, title}: HeroPayload) => {
 
           <Link
             className="blinker block max-w-fit rounded-full bg-primary px-14 py-4 tracking-wider text-white transition-colors hover:bg-primary_accent"
-            href={link?.slug ? link.slug : '/'}
+            href={link?.slug ? `${link.slug}` : '/'}
           >
             {btnText && btnText}
           </Link>

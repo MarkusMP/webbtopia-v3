@@ -1,4 +1,6 @@
 import {
+  BlockContentIcon,
+  ClipboardImageIcon,
   DocumentIcon,
   DocumentsIcon,
   HomeIcon,
@@ -120,6 +122,73 @@ export const deskTool = definePlugin(() => {
                         .title(`pages documents`)
                         .schemaType('page')
                         .filter('_type == "page" && language == "sv"')
+                    ),
+                ])
+            ),
+          S.divider(),
+          S.listItem()
+            .title('Blog')
+            .icon(BlockContentIcon)
+            .child(
+              S.list()
+                .title('Blogs language filter')
+                .items([
+                  S.listItem()
+                    .title('All blogs documents')
+                    .child(
+                      S.documentList()
+                        .title(`All blog documents`)
+                        .schemaType('blog')
+                        .filter('_type == "blog"')
+                    ),
+                  S.listItem()
+                    .title('Blogs in English')
+                    .child(
+                      S.documentList()
+                        .title(`Blog documents`)
+                        .schemaType('blog')
+                        .filter('_type == "blog" && language == "en"')
+                    ),
+                  S.listItem()
+                    .title('Blogs in Swedish')
+                    .child(
+                      S.documentList()
+                        .title(`Blog documents`)
+                        .schemaType('blog')
+                        .filter('_type == "blog" && language == "sv"')
+                    ),
+                ])
+            ),
+          S.listItem()
+            .title('Categories')
+            .icon(ClipboardImageIcon)
+            .child(
+              S.list()
+                .title('Categories language filter')
+                .items([
+                  S.listItem()
+                    .title('All categories documents')
+                    .child(
+                      S.documentList()
+                        .title(`All category documents`)
+                        .schemaType('category')
+                        .filter('_type == "category"')
+                    ),
+                  S.listItem()
+                    .title('Categories in English')
+                    .child(
+                      S.documentList()
+                        .title(`Category documents`)
+                        .schemaType('category')
+                        .filter('_type == "category" && language == "en"')
+                    ),
+                  S.listItem()
+                    .title('Categories in Swedish')
+                    .child(
+                      S.documentList()
+                        .title(`Category documents`)
+                        .schemaType('category')
+                        .filter('_type == "category" && language == "sv"')
                     ),
                 ])
             ),

@@ -29,6 +29,13 @@ export const PAGE_DATA_QUERY = groq`
         link-> {
           "slug": slug.current,
         },
+      },
+      blogListPreview[]-> {
+        image,
+        _id,
+        title,
+        description,
+        "slug": slug.current,
       }
     }
   }
@@ -61,8 +68,27 @@ export const HOME_PAGE_DATA_QUERY = groq`
         link-> {
           "slug": slug.current,
         },
+      },
+      blogListPreview[]-> {
+        image,
+        _id,
+        title,
+        description,
+        "slug": slug.current,
       }
     }
+  }
+`
+export const BLOG_PAGE_DATA_QUERY = groq`
+  *[_type == 'blog' && language == $language][0]{
+    title,
+    slug,
+    language,
+    indexPage,
+    descriptionSEO,
+    titleSEO,
+    image,
+    body
   }
 `
 export const NOT_FOUND_PAGE_DATA_QUERY = groq`
@@ -77,21 +103,23 @@ export const NOT_FOUND_PAGE_DATA_QUERY = groq`
         "slug": slug.current,
         language
       },
-      workItemList[]-> {
-       _id,
-        description,
-        image,
-        title,
-        link-> {
-          "slug": slug.current,
-        },
-      }
     }
   }
 `
-
 export const PAGE_PATHS_QUERY = groq`
   *[_type == 'page' && defined(slug.current)]{
+    'slug': slug.current,
+    language
+  }
+`
+export const BLOG_PAGE_PATHS_QUERY_EN = groq`
+  *[_type == 'blog' && language == 'en' && defined(slug.current)]{
+    'slug': slug.current,
+    language
+  }
+`
+export const BLOG_PAGE_PATHS_QUERY_SV = groq`
+  *[_type == 'blog' && language == 'sv' && defined(slug.current)]{
     'slug': slug.current,
     language
   }

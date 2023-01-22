@@ -79,7 +79,13 @@ export const pageType = defineType({
       name: 'content',
       type: 'array',
       title: 'Page sections',
-      of: [{type: 'hero'}, {type: 'workList'}, {type: 'servicesList'}],
+      of: [
+        {type: 'hero'},
+        {type: 'workList'},
+        {type: 'servicesList'},
+        {type: 'feature'},
+        {type: 'blogListPreview'},
+      ],
     }),
     defineField({
       title: 'Title for SEO',

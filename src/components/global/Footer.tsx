@@ -43,7 +43,7 @@ const Footer = ({data}: {data: FooterPayload}) => {
                     key={item._id}
                     className="pb-2 text-secondary transition-colors hover:text-primary "
                   >
-                    <Link href={item.slug}>{item.title}</Link>
+                    <Link href={`/${item.slug}`}>{item.title}</Link>
                   </li>
                 )
               )}

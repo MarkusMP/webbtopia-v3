@@ -34,6 +34,10 @@ export function PagePreview(props: any) {
     slug = '/'
   } else if (lang === 'sv' && displayed?._type === 'home') {
     slug = '/sv'
+  } else if (lang === 'en' && displayed?._type === 'blog') {
+    slug === `blog/${slug}`
+  } else if (lang === 'sv' && displayed?._type === 'blog') {
+    slug === `sv/blogg/${slug}`
   } else if (lang === 'en') {
     slug === `${slug}`
   } else if (lang === 'sv') {
@@ -48,6 +52,18 @@ export function PagePreview(props: any) {
     )
   }
 
+  if (lang === 'sv' && displayed?._type === 'blog') {
+    return (
+      <Suspense fallback={null}>
+        <PagePreviewWithSecret
+          id={id}
+          slug={`${displayed.slug.current}`}
+          type={type}
+          language={lang}
+        />
+      </Suspense>
+    )
+  }
   return (
     <Suspense fallback={null}>
       <PagePreviewWithSecret id={id} slug={`${slug}`} type={type} language={lang} />

@@ -2,15 +2,20 @@ import {GetStaticProps} from 'next'
 import {notFound} from 'next/navigation'
 import {PreviewSuspense} from 'next-sanity/preview'
 
-import {LazyPreviewPage} from '../page/LazyPreviewPage'
-import {LoadingScreen} from '../page/LoadingScreen'
-import {PageScreen} from '../page/PageScreen'
-import {FOOTER_QUERY, HEADER_QUERY, PAGE_DATA_QUERY, PAGE_PATHS_QUERY} from '../page/query'
-import {FooterPayload, HeaderPayload, PageData} from '../page/types'
-import {client} from '../sanity/client'
+import {BlogPageScreen} from '../../page/BlogPageScreen'
+import {LazyPreviewBlogPage} from '../../page/LazyPreviewPage'
+import {LoadingScreen} from '../../page/LoadingScreen'
+import {
+  BLOG_PAGE_DATA_QUERY,
+  BLOG_PAGE_PATHS_QUERY_SV,
+  FOOTER_QUERY,
+  HEADER_QUERY,
+} from '../../page/query'
+import {FooterPayload, HeaderPayload, PageBlogData} from '../../page/types'
+import {client} from '../../sanity/client'
 
 interface PageProps {
-  data: PageData | null
+  data: PageBlogData | null
   preview: boolean
   slug: string | null
   token: string | null
@@ -45,7 +50,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query, PreviewData> = asy
     }
   }
 
-  const data = await client.fetch<PageData | null>(PAGE_DATA_QUERY, {
+  const data = await client.fetch<PageBlogData | null>(BLOG_PAGE_DATA_QUERY, {
     slug: params.slug,
     language: locale === 'sv' ? 'sv' : 'en',
   })
@@ -77,7 +82,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query, PreviewData> = asy
 }
 
 export const getStaticPaths = async ({locales}: any) => {
-  const pages = await client.fetch<{slug: string}[] | null>(PAGE_PATHS_QUERY)
+  const pages = await client.fetch<{slug: string}[] | null>(BLOG_PAGE_PATHS_QUERY_SV)
 
   const paths = [] as any
 
@@ -94,8 +99,6 @@ export const getStaticPaths = async ({locales}: any) => {
       })
     })
 
-  console.log(paths)
-
   return {
     paths,
     fallback: false,
@@ -108,10 +111,10 @@ export default function Page(props: PageProps) {
   if (preview) {
     return (
       <PreviewSuspense fallback={<LoadingScreen>Loading preview…</LoadingScreen>}>
-        <LazyPreviewPage slug={slug} token={token} locale={locale} />
+        <LazyPreviewBlogPage slug={slug} token={token} locale={locale} />
       </PreviewSuspense>
     )
   }
 
-  return <PageScreen data={data} footer={footer} header={header} />
+  return <BlogPageScreen data={data} footer={footer} header={header} />
 }

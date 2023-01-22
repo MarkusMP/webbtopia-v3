@@ -1,13 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 
 import {HeaderMenuItemPayload, HeaderPayload} from '../../page/types'
 import {urlForImage} from '../../sanity/lib/sanity.image'
 import DropDown from '../DropDown'
 
 const Header = ({data}: {data: HeaderPayload}) => {
+  const menuRef = useRef(null)
   const [navbar, setNavbar] = useState(false)
   const [open, setOpen] = useState(false)
   const [background, setBackground] = useState(false)
@@ -29,14 +30,26 @@ const Header = ({data}: {data: HeaderPayload}) => {
   }
 
   useEffect(() => {
+    const handler = (e: any) => {
+      // @ts-ignore: Unreachable code error
+      if (!menuRef.current.contains(e.target)) {
+        setOpen(false)
+      }
+    }
     changeBackground()
     // adding the event when scroll change background
+    document.addEventListener('mousedown', handler)
     window.addEventListener('scroll', changeBackground)
+    return () => {
+      document.removeEventListener('mousedown', handler)
+      window.removeEventListener('scroll', changeBackground)
+    }
   })
 
   const imageUrl = data.image && urlForImage(data.image as any)?.url()
   return (
     <header
+      ref={menuRef}
       className={
         navbar
           ? `fixed z-[10] mb-[80px] h-[80px] w-full bg-white bg-opacity-100 transition-opacity group-hover:bg-white`
@@ -82,7 +95,7 @@ const Header = ({data}: {data: HeaderPayload}) => {
                   key={item._id}
                   className="blinker pb-2 text-secondary transition-colors hover:text-primary lg:px-2 lg:pb-0"
                 >
-                  <Link href={item.slug}>{item.title}</Link>
+                  <Link href={`/${item.slug}`}>{item.title}</Link>
                 </li>
               )
             )}
