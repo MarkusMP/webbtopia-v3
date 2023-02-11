@@ -13,6 +13,26 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'link',
+      title: 'What page should this work link to?',
+      type: 'reference',
+      to: [
+        {
+          type: 'page',
+        },
+      ],
+    }),
+    defineField({
+      name: 'categories',
+      title: 'Categories',
+      type: 'reference',
+      to: [
+        {
+          type: 'category',
+        },
+      ],
+    }),
+    defineField({
       title: 'Description',
       name: 'description',
       type: 'string',
@@ -34,16 +54,6 @@ export default defineType({
           type: 'string',
           title: 'Alternative text',
           description: 'Important for SEO and accessiblity.',
-        },
-      ],
-    }),
-    defineField({
-      name: 'link',
-      title: 'Button Link to',
-      type: 'reference',
-      to: [
-        {
-          type: 'page',
         },
       ],
     }),

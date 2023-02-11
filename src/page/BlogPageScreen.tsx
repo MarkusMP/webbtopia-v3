@@ -12,8 +12,9 @@ export function BlogPageScreen(props: {
   data: PageBlogData | null
   header: HeaderPayload
   footer: FooterPayload
+  canonical: string
 }) {
-  const {data, header, footer} = props
+  const {data, header, footer, canonical} = props
   const router = useRouter()
 
   const myPortableTextComponents = {
@@ -45,31 +46,37 @@ export function BlogPageScreen(props: {
     },
   }
 
-  const imageProps = urlForImage(data?.image as any)?.url()
+  const imageProps = urlForImage(data?.image as any)
+    ?.width(830)
+    ?.url()
+
+  const ogImage = data?.ogImage && urlForImage(data.ogImage as any)?.url()
 
   return (
     <>
       <SiteMeta
-        noIndex={!data?.indexPage ? false : data?.indexPage && true}
+        noIndex={!data?.indexPage ? false : data.indexPage === true ? true : false}
         title={data?.titleSEO}
         description={data?.descriptionSEO}
+        canonical={canonical}
+        ogImage={ogImage}
       />
       <Layout header={header} footer={footer}>
         <section className="pt-[80px]">
           <div className="container mx-auto max-w-2xl py-12 px-6">
             <Link href={router.locale === 'en' ? '/blog' : '/sv/blogg'}>
-              <button className="mb-4 rounded-full bg-primary px-4 py-2 text-white hover:bg-primary_accent">
+              <button className="mb-6 rounded-full bg-primary px-4 py-2 text-white hover:bg-primary_accent">
                 {router.locale === 'en' ? 'Go back' : 'Gå Tillbaka'}
               </button>
             </Link>
 
             {imageProps && (
               <Image
-                className="image rounded"
+                className="image rounded-lg"
                 src={imageProps}
                 alt={data?.image?.alt ? data?.image?.alt : ''}
-                width={630}
-                height={630}
+                width={830}
+                height={830}
                 priority
               />
             )}

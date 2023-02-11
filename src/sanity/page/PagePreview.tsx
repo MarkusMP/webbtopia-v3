@@ -79,7 +79,9 @@ function PagePreviewWithSecret(props: {id: string; slug: string; type: string; l
   // Use `suspend` to fetch the secret with a TTL of 1 minute, just to check if it's necessary to
   // recreate the secret which has a TTL of 60 minutes.
   const secret = suspend(
-    () => getSecret({client, id: previewSecretId, createIfNotExists: true}),
+    () => {
+      return getSecret({client, id: previewSecretId, createIfNotExists: true})
+    },
     ['getSecret', previewSecretId, FETCH_SECRET],
     {lifespan: 60000}
   )

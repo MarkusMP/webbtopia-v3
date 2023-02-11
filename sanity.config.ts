@@ -26,7 +26,18 @@ export default defineConfig<Config>({
         {id: 'en', title: 'English'},
       ],
       // Required
-      schemaTypes: ['home', 'page', 'notFound', 'header', 'footer', 'work', 'blog', 'category'],
+      schemaTypes: [
+        'home',
+        'page',
+        'notFound',
+        'header',
+        'footer',
+        'work',
+        'blog',
+        'category',
+        'technologyLinks',
+        'redirects',
+      ],
     }),
   ],
 })

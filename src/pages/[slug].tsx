@@ -73,6 +73,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query, PreviewData> = asy
       header,
       footer,
     },
+    revalidate: 60,
   }
 }
 
@@ -94,8 +95,6 @@ export const getStaticPaths = async ({locales}: any) => {
       })
     })
 
-  console.log(paths)
-
   return {
     paths,
     fallback: false,
@@ -108,10 +107,22 @@ export default function Page(props: PageProps) {
   if (preview) {
     return (
       <PreviewSuspense fallback={<LoadingScreen>Loading preview…</LoadingScreen>}>
-        <LazyPreviewPage slug={slug} token={token} locale={locale} />
+        <LazyPreviewPage
+          slug={slug}
+          token={token}
+          locale={locale}
+          canonical={`${process.env.NEXT_PUBLIC_SITE_URL}${locale === 'en' ? '/' : '/sv/'}${slug}`}
+        />
       </PreviewSuspense>
     )
   }
 
-  return <PageScreen data={data} footer={footer} header={header} />
+  return (
+    <PageScreen
+      data={data}
+      footer={footer}
+      header={header}
+      canonical={`${process.env.NEXT_PUBLIC_SITE_URL}${locale === 'en' ? '/' : '/sv/'}${slug}`}
+    />
+  )
 }

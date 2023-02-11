@@ -2,14 +2,16 @@ import Head from 'next/head'
 
 export function SiteMeta({
   description,
-  image,
+  ogImage,
   title,
   noIndex = false,
+  canonical,
 }: {
   description?: string
-  image?: string
+  ogImage?: string
   title?: string
   noIndex: boolean
+  canonical?: string | null
 }) {
   return (
     <Head>
@@ -23,10 +25,17 @@ export function SiteMeta({
       <meta name="msapplication-TileColor" content="#F9FAFB" />
       <meta name="msapplication-config" content="/browserconfig.xml" />
       <meta name="theme-color" content="#F9FAFB" />
-
       <meta key="description" name="description" content={description && description} />
 
-      {image && <meta property="og:image" content={image} />}
+      {canonical && <link rel="canonical" href={canonical} key="canonical" />}
+
+      {ogImage && <meta property="og:title" content={title && title} />}
+      {ogImage && <meta property="og:image" content={ogImage} />}
+      {ogImage && <meta property="og:description" content={description && description} />}
+      {ogImage && canonical && <meta property="og:url" content={canonical} />}
+      {ogImage && <meta property="og:image:width" content="1200" />}
+      {ogImage && <meta property="og:image:height" content="630" />}
+
       {noIndex && <meta key="robots" name="robots" content="noindex,follow" />}
       {noIndex && <meta key="googlebot" name="googlebot" content="noindex,follow" />}
     </Head>

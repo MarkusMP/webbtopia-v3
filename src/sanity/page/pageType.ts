@@ -81,10 +81,25 @@ export const pageType = defineType({
       title: 'Page sections',
       of: [
         {type: 'hero'},
+        {type: 'heroTwo'},
+        {type: 'heroThree'},
         {type: 'workList'},
         {type: 'servicesList'},
         {type: 'feature'},
+        {type: 'featureTwo'},
+        {type: 'featureThree'},
+        {type: 'featureCaseStudy'},
         {type: 'blogListPreview'},
+        {type: 'contact'},
+        {type: 'contactTwo'},
+        {type: 'blogFeature'},
+        {type: 'blogList'},
+        {type: 'workFeature'},
+        {type: 'faq'},
+        {type: 'faqTwo'},
+        {type: 'technologiesList'},
+        {type: 'technologiesListTwo'},
+        {type: 'blockContentSectionType'},
       ],
     }),
     defineField({
@@ -104,6 +119,12 @@ export const pageType = defineType({
       fieldset: 'seo',
       validation: (Rule) =>
         Rule.max(160).warning(`A description shouldn't be more than 160 characters.`),
+    }),
+    defineField({
+      title: 'Og image',
+      description: 'Upload image here.',
+      name: 'ogImage',
+      type: 'image',
     }),
   ],
 })

@@ -1,5 +1,5 @@
 {
-  "name": "sanity-template-nexjs",
+  "name": "webbtopia-v3",
   "version": "1.0.0",
   "private": true,
   "keywords": [
@@ -7,7 +7,6 @@
     "template",
     "nextjs"
   ],
-  "license": "MIT",
   "main": "package.json",
   "scripts": {
     "build": "next build",
@@ -30,14 +29,19 @@
     "@sanity/icons": "^2.2.2",
     "@sanity/ui": "^1.0.12",
     "@sanity/vision": "^3.1.4",
+    "@sendgrid/mail": "^7.7.0",
     "@tailwindcss/typography": "^0.5.8",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.3",
     "next": "^13.1.1",
+    "next-plausible": "^3.7.2",
     "next-sanity": "^3.1.9",
     "next-sitemap": "^3.1.45",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-is": "^18.2.0",
+    "react-toastify": "^9.1.1",
     "sanity": "^3.1.4",
     "sanity-plugin-media": "^2.0.2",
     "styled-components": "^5.3.6",

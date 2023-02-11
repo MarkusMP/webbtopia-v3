@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 import sanityClient from '@sanity/client'
+import {withPlausibleProxy} from 'next-plausible'
+
 const client = sanityClient({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -8,13 +10,14 @@ const client = sanityClient({
 })
 
 async function fetchSanityRedirects() {
-  const data = await client.fetch(`*[_type == "redirects"]{ from, to, isPermanent }`)
+  const data = await client.fetch(`*[_type == "redirects"]{ from, to, isPermanent, language }`)
 
   const redirects = data.map((redirect) => {
     return {
-      source: `/${redirect.from}`,
-      destination: `/${redirect.to}`,
+      source: `/${redirect.language === 'en' ? 'en/' : 'sv/'}${redirect.from}`,
+      destination: `/${redirect.language === 'en' ? '' : 'sv/'}${redirect.to}`,
       permanent: redirect.isPermanent,
+      locale: false,
     }
   })
 
@@ -34,11 +37,35 @@ const config = {
   },
   async redirects() {
     const sanityRedirects = await fetchSanityRedirects()
-    console.log(sanityRedirects)
     return sanityRedirects
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          // {
+          //   key: 'Content-Security-Policy',
+          //   value: generateCsp(),
+          // },
+        ],
+      },
+    ]
   },
 
   reactStrictMode: true,
 }
 
-export default config
+export default withPlausibleProxy()(config)

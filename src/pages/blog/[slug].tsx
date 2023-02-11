@@ -78,6 +78,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query, PreviewData> = asy
       header,
       footer,
     },
+    revalidate: 60,
   }
 }
 
@@ -111,10 +112,24 @@ export default function Page(props: PageProps) {
   if (preview) {
     return (
       <PreviewSuspense fallback={<LoadingScreen>Loading preview…</LoadingScreen>}>
-        <LazyPreviewBlogPage slug={slug} token={token} locale={locale} />
+        <LazyPreviewBlogPage
+          slug={slug}
+          token={token}
+          locale={locale}
+          canonical={`${process.env.NEXT_PUBLIC_SITE_URL}${
+            locale === 'en' ? '/' : '/sv/'
+          }blog/${slug}`}
+        />
       </PreviewSuspense>
     )
   }
 
-  return <BlogPageScreen data={data} footer={footer} header={header} />
+  return (
+    <BlogPageScreen
+      data={data}
+      footer={footer}
+      header={header}
+      canonical={`${process.env.NEXT_PUBLIC_SITE_URL}${locale === 'en' ? '/' : '/sv/'}blog/${slug}`}
+    />
+  )
 }

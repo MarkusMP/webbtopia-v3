@@ -17,7 +17,7 @@ const Layout = ({
     <>
       <Header data={header} />
       <div className="flex flex-col">
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow overflow-hidden">{children}</main>
       </div>
       <Footer data={footer} />
     </>

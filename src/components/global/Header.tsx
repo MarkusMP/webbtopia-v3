@@ -46,7 +46,11 @@ const Header = ({data}: {data: HeaderPayload}) => {
     }
   })
 
-  const imageUrl = data.image && urlForImage(data.image as any)?.url()
+  const imageUrl =
+    data.image &&
+    urlForImage(data.image as any)
+      ?.width(350)
+      ?.url()
   return (
     <header
       ref={menuRef}
@@ -55,15 +59,15 @@ const Header = ({data}: {data: HeaderPayload}) => {
           ? `fixed z-[10] mb-[80px] h-[80px] w-full bg-white bg-opacity-100 transition-opacity group-hover:bg-white`
           : `fixed z-[10] mb-[80px] h-[80px] w-full bg-white ${
               open
-                ? `${background ? 'bg-opacity-100' : 'bg-opacity-100 lg:bg-opacity-0'}`
-                : `${background ? 'bg-opacity-100' : 'bg-opacity-0'}`
+                ? `${background ? 'bg-opacity-100' : 'bg-opacity-100 lg:bg-transparent'}`
+                : `${background ? 'bg-opacity-100' : 'bg-transparent'}`
             } transition-opacity group-hover:bg-white`
       }
     >
       <nav className="relative mx-auto flex h-full items-center justify-between px-8 xl:container">
         <div className="mr-8 xl:mr-0">
           <Link href={router.locale === 'en' ? '/' : '/sv'}>
-            <Image src={imageUrl as any} width={200} height={120} alt={data.image?.alt || ''} />
+            <Image src={imageUrl as any} width={200} height={50} alt={data.image?.alt || ''} />
           </Link>
         </div>
         <ul
@@ -128,7 +132,7 @@ const Header = ({data}: {data: HeaderPayload}) => {
           </Link>
           {data.btnText && (
             <Link
-              className="rounded-full border-2 border-primary px-8 py-3 font-semibold text-primary transition-colors hover:bg-primary hover:text-white"
+              className="rounded-full border-2 border-primary px-8 py-3 text-primary transition-colors hover:bg-primary hover:text-white"
               href={`/${data.link?.slug}`}
             >
               {data.btnText}

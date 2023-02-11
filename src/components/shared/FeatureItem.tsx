@@ -9,7 +9,10 @@ const FeatureItem = ({data}: {data: IFeatureItem}) => {
       <div className="pr-4">
         <AiFillCheckCircle className="text-2xl text-primary" />
       </div>
-      <p>{data.title && data.title}</p>
+      <div>
+        <h3 className="font-semibold text-dark">{data.subTitle && data.subTitle}</h3>
+        <p className="text-gray">{data.title && data.title}</p>
+      </div>
     </div>
   )
 }

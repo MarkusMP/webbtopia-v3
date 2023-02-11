@@ -6,8 +6,9 @@ export default function PreviewBlogPage(props: {
   slug: string | null
   token: string | null
   locale?: string
+  canonical: string
 }) {
-  const {slug, token, locale} = props
+  const {slug, token, locale, canonical} = props
 
   return (
     <BlogPageScreen
@@ -18,6 +19,7 @@ export default function PreviewBlogPage(props: {
       header={usePreview(token, HEADER_QUERY, {
         language: locale,
       })}
+      canonical={canonical}
       footer={usePreview(token, FOOTER_QUERY, {
         language: locale,
       })}

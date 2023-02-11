@@ -9,17 +9,21 @@ import {urlForImage} from '../../sanity/lib/sanity.image'
 const Footer = ({data}: {data: FooterPayload}) => {
   const router = useRouter()
 
-  const imageUrl = data.image && urlForImage(data.image as any)?.url()
+  const imageUrl =
+    data.image &&
+    urlForImage(data.image as any)
+      ?.width(200)
+      ?.url()
   return (
     <footer className="mx-auto flex flex-col justify-between py-8 px-8 md:flex-row xl:container">
       <div className="mr-0 pb-8 sm:pb-0 md:mr-8">
         {data.image && (
           <Link href={router.locale === 'en' ? '/' : '/sv'}>
-            <Image src={imageUrl as any} width={200} height={120} alt={data.image?.alt || ''} />
+            <Image src={imageUrl as any} width={200} height={50} alt={data.image?.alt || ''} />
           </Link>
         )}
         <a
-          className="break-all pt-4 text-lg transition-colors hover:text-primary sm:break-normal"
+          className="break-all pt-4 transition-colors hover:text-primary xs:text-lg sm:break-normal"
           href={`mailto:${data.emailText && data.emailText}`}
         >
           {data.emailText && data.emailText}

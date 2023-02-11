@@ -72,6 +72,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query, PreviewData> = asy
       locale: locale,
       footer,
     },
+    revalidate: 60,
   }
 }
 
@@ -81,10 +82,22 @@ export default function Page(props: PageProps) {
   if (preview) {
     return (
       <PreviewSuspense fallback={<LoadingScreen>Loading preview…</LoadingScreen>}>
-        <LazyPreviewPage slug={slug} token={token} locale={locale} />
+        <LazyPreviewPage
+          slug={slug}
+          token={token}
+          locale={locale}
+          canonical={`${process.env.NEXT_PUBLIC_SITE_URL}${locale === 'en' ? '/' : '/sv'}`}
+        />
       </PreviewSuspense>
     )
   }
 
-  return <PageScreen data={data} header={header} footer={footer} />
+  return (
+    <PageScreen
+      data={data}
+      header={header}
+      footer={footer}
+      canonical={`${process.env.NEXT_PUBLIC_SITE_URL}${locale === 'en' ? '/' : '/sv'}`}
+    />
+  )
 }

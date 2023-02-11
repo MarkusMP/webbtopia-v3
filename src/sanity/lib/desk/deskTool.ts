@@ -1,4 +1,5 @@
 import {
+  ArchiveIcon,
   BlockContentIcon,
   ClipboardImageIcon,
   DocumentIcon,
@@ -196,7 +197,36 @@ export const deskTool = definePlugin(() => {
           S.listItem()
             .title('Redirects')
             .icon(LinkIcon)
-            .child(S.document().schemaType('redirects').documentId('redirects')),
+            .child(
+              S.list()
+                .title('Redirects language filter')
+                .items([
+                  S.listItem()
+                    .title('All redirects documents')
+                    .child(
+                      S.documentList()
+                        .title(`Redirects documents`)
+                        .schemaType('redirects')
+                        .filter('_type == "redirects"')
+                    ),
+                  S.listItem()
+                    .title('Redirects documents in English')
+                    .child(
+                      S.documentList()
+                        .title(`Redirects documents`)
+                        .schemaType('redirects')
+                        .filter('_type == "redirects" && language == "en"')
+                    ),
+                  S.listItem()
+                    .title('Redirects documents in Swedish')
+                    .child(
+                      S.documentList()
+                        .title(`Redirects documents`)
+                        .schemaType('redirects')
+                        .filter('_type == "redirects" && language == "sv"')
+                    ),
+                ])
+            ),
           S.divider(),
           S.listItem()
             .title('work')
@@ -228,6 +258,39 @@ export const deskTool = definePlugin(() => {
                         .title(`Work documents`)
                         .schemaType('work')
                         .filter('_type == "work" && language == "sv"')
+                    ),
+                ])
+            ),
+          S.listItem()
+            .title('Technology Links')
+            .icon(ArchiveIcon)
+            .child(
+              S.list()
+                .title('Technology links language filter')
+                .items([
+                  S.listItem()
+                    .title('All technology links documents')
+                    .child(
+                      S.documentList()
+                        .title(`Technology links documents`)
+                        .schemaType('technologyLinks')
+                        .filter('_type == "technologyLinks"')
+                    ),
+                  S.listItem()
+                    .title('Technology links documents in English')
+                    .child(
+                      S.documentList()
+                        .title(`Technology links documents`)
+                        .schemaType('technologyLinks')
+                        .filter('_type == "technologyLinks" && language == "en"')
+                    ),
+                  S.listItem()
+                    .title('Technology links documents in Swedish')
+                    .child(
+                      S.documentList()
+                        .title(`Technology links documents`)
+                        .schemaType('technologyLinks')
+                        .filter('_type == "technologyLinks" && language == "sv"')
                     ),
                 ])
             ),

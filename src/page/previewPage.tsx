@@ -12,8 +12,9 @@ export default function PreviewPage(props: {
   slug: string | null
   token: string | null
   locale?: string
+  canonical?: string | null
 }) {
-  const {slug, token, locale} = props
+  const {slug, token, locale, canonical} = props
 
   return (
     <PageScreen
@@ -29,6 +30,7 @@ export default function PreviewPage(props: {
           language: locale,
         }
       )}
+      canonical={canonical}
       header={usePreview(token, HEADER_QUERY, {
         language: locale,
       })}

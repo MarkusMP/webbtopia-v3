@@ -76,8 +76,12 @@ export const blogPageType = defineType({
     defineField({
       name: 'categories',
       title: 'Categories',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
+      type: 'reference',
+      to: [
+        {
+          type: 'category',
+        },
+      ],
     }),
     defineField({
       name: 'publishedAt',
@@ -108,7 +112,25 @@ export const blogPageType = defineType({
       title: 'Body',
       type: 'blockContent',
     }),
-
+    defineField({
+      name: 'authorInfo',
+      title: 'Author info',
+      type: 'string',
+    }),
+    defineField({
+      title: 'Author image',
+      description: 'Upload author image here.',
+      name: 'authorImage',
+      type: 'image',
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+          description: 'Important for SEO and accessiblity.',
+        },
+      ],
+    }),
     defineField({
       title: 'Title for SEO',
       description:
@@ -126,6 +148,12 @@ export const blogPageType = defineType({
       fieldset: 'seo',
       validation: (Rule) =>
         Rule.max(160).warning(`A description shouldn't be more than 160 characters.`),
+    }),
+    defineField({
+      title: 'Og image',
+      description: 'Upload image here.',
+      name: 'ogImage',
+      type: 'image',
     }),
   ],
 })

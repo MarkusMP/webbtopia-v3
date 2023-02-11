@@ -15,15 +15,17 @@ const BlogListPreview = ({
   return (
     <section className="mx-auto flex items-center px-8 py-12 xl:container">
       <div className="flex flex-col lg:flex-row">
-        <div className="flex w-full flex-col pb-8 lg:w-2/4 lg:pr-4">
-          <h3 className="blinker pb-3 tracking-widest text-primary">{subTitle && subTitle}</h3>
-          <h2 className="blinker text-4xl tracking-wider">{title && title}</h2>
-          <p className="pt-6">{description && description}</p>
+        <div className="flex w-full flex-col pb-8 lg:w-2/4 lg:pr-4 2xl:w-3/4">
+          <h3 className="pb-3 tracking-wider text-primary">{subTitle && subTitle}</h3>
+          <h2 className="text-2xl font-semibold tracking-wider text-dark sm:text-4xl">
+            {title && title}
+          </h2>
+          <p className="pt-6 text-gray">{description && description}</p>
 
           <div className="flex-1 pb-6"></div>
 
           <Link
-            className="blinker block max-w-fit rounded-full bg-primary px-14 py-4 text-center tracking-wider text-white transition-colors hover:bg-primary_accent"
+            className="blinker block max-w-fit rounded-full bg-primary px-14 py-3 text-center tracking-wider text-white transition-colors hover:bg-primary_accent"
             href={link?.slug ? `${link.slug}` : '/'}
           >
             {btnText && btnText}

@@ -67,6 +67,7 @@ export const homePageType = defineType({
         {type: 'servicesList'},
         {type: 'feature'},
         {type: 'blogListPreview'},
+        {type: 'contact'},
       ],
     }),
     defineField({
@@ -86,6 +87,12 @@ export const homePageType = defineType({
       fieldset: 'seo',
       validation: (Rule) =>
         Rule.max(160).warning(`A description shouldn't be more than 160 characters.`),
+    }),
+    defineField({
+      title: 'Og image',
+      description: 'Upload image here.',
+      name: 'ogImage',
+      type: 'image',
     }),
   ],
 })

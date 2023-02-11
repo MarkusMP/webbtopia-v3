@@ -19,6 +19,12 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    }),
+    defineField({
       title: 'Is this a permanent redirect (301)?',
       name: 'isPermanent',
       type: 'boolean',

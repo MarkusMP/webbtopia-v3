@@ -82,5 +82,11 @@ export const notFoundPageType = defineType({
       validation: (Rule) =>
         Rule.max(160).warning(`A description shouldn't be more than 160 characters.`),
     }),
+    defineField({
+      title: 'Og image',
+      description: 'Upload image here.',
+      name: 'ogImage',
+      type: 'image',
+    }),
   ],
 })
