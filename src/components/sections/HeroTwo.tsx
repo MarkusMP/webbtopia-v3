@@ -15,7 +15,7 @@ const HeroTwo = ({btnText, description, image, link, title}: HeroTwoPayload) => 
   return (
     <section className="mx-auto flex min-h-screen items-center px-8 pt-24 pb-8 xl:container">
       <div className="flex w-full flex-col items-center justify-between lg:flex-row">
-        <div className="box box-1 order-2 h-full pt-8 lg:order-1 lg:w-2/3 lg:w-1/2 lg:pr-4">
+        <div className="order-2 h-full pt-8 lg:order-1 lg:w-2/3 lg:w-1/2 lg:pr-4">
           <h1 className="blinker pb-6 text-3xl font-bold tracking-wide text-dark xs:text-5xl md:text-6xl">
             {title && title}
           </h1>
@@ -28,7 +28,7 @@ const HeroTwo = ({btnText, description, image, link, title}: HeroTwoPayload) => 
             {btnText && btnText}
           </Link>
         </div>
-        <div className="box box-2 order-1 w-full rounded-lg lg:order-2 lg:w-2/3 lg:w-1/2 lg:pl-4">
+        <div className="order-1 w-full rounded-lg lg:order-2 lg:w-2/3 lg:w-1/2 lg:pl-4">
           <Image
             src={imageUrl as any}
             width={450}

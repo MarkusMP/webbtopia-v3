@@ -22,7 +22,7 @@ const BlogFeature = ({blogListFeature, blogPost, title}: IBlogFeature) => {
   return (
     <section className="mx-auto mt-[80px] flex items-center px-8 py-12 xl:container">
       <div className="flex w-full flex-col md:flex-row">
-        <div className="box box-1 order-2 w-full md:order-1 md:w-1/2 md:pr-4">
+        <div className="order-2 w-full md:order-1 md:w-1/2 md:pr-4">
           {image && (
             <Image
               priority
@@ -67,7 +67,7 @@ const BlogFeature = ({blogListFeature, blogPost, title}: IBlogFeature) => {
             </span>
           </Link>
         </div>
-        <div className="box box-2 order-1 w-full pb-6 md:order-2 md:w-1/2 md:pl-4 md:pb-0">
+        <div className="order-1 w-full pb-6 md:order-2 md:w-1/2 md:pl-4 md:pb-0">
           <h1 className="blinker text-4xl font-semibold tracking-wider text-dark text-dark sm:text-5xl lg:text-6xl">
             {title && title}
           </h1>

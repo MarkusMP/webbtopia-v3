@@ -55,13 +55,13 @@ const WorkFeature = ({workCase, description, title, workList}: IWorkFeature) => 
   return (
     <section className="mx-auto mt-[80px] items-center px-8 py-12 xl:container">
       <div className="flex w-full flex-col md:flex-row">
-        <div className="box box-1 flex w-full flex-col pb-6 md:w-1/2 md:pr-4 md:pb-0">
+        <div className="flex w-full flex-col pb-6 md:w-1/2 md:pr-4 md:pb-0">
           <h1 className="blinker text-4xl font-semibold tracking-wider text-dark sm:text-5xl lg:text-7xl">
             {title && title}
           </h1>
           <p className="pt-6 text-gray md:text-lg">{description && description}</p>
         </div>
-        <div className="box box-2 w-full md:w-1/2 md:pl-4">
+        <div className="w-full md:w-1/2 md:pl-4">
           {image && (
             <Image
               priority

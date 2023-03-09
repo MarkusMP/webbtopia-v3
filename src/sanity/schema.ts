@@ -23,6 +23,7 @@ import blogList from './sections/blogList'
 import blogListPreview from './sections/blogListPreview'
 import contact from './sections/contact'
 import contactTwo from './sections/contactTwo'
+import cta from './sections/cta'
 import faq from './sections/faq'
 import faqTwo from './sections/faqTwo'
 import feature from './sections/feature'
@@ -83,5 +84,6 @@ export const schema: {types: SchemaTypeDefinition[]} = {
     featureThree,
     technologiesListTwo,
     blockContentSectionType,
+    cta,
   ],
 }

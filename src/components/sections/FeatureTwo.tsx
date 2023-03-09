@@ -1,5 +1,7 @@
+import {motion, useAnimation} from 'framer-motion'
 import Image from 'next/image'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import {useInView} from 'react-intersection-observer'
 
 import {IFeatureTwo} from '../../page/types'
 import {urlForImage} from '../../sanity/lib/sanity.image'
@@ -14,6 +16,24 @@ const FeatureTwo = ({
   titleTwo,
   subTitle,
 }: IFeatureTwo) => {
+  const controls = useAnimation()
+  const {ref, inView} = useInView()
+  const [hasAnimated, setHasAnimated] = useState(false)
+  useEffect(() => {
+    if (inView && !hasAnimated) {
+      controls.start({
+        y: 0,
+        opacity: 1,
+        transition: {
+          duration: 0.8,
+        },
+      })
+      setHasAnimated(true)
+    }
+    if (!inView && !hasAnimated) {
+      controls.start({y: 30, opacity: 0})
+    }
+  }, [controls, inView, hasAnimated])
   const imageUrl =
     image &&
     urlForImage(image as any)
@@ -21,7 +41,12 @@ const FeatureTwo = ({
       ?.url()
 
   return (
-    <section className="mx-auto flex flex-col px-8 py-12 lg:flex-row xl:container">
+    <motion.section
+      animate={controls}
+      ref={ref}
+      layout="position"
+      className="mx-auto flex flex-col px-8 py-12 lg:flex-row xl:container"
+    >
       <div className="w-full  lg:w-1/2 lg:pr-4">
         <Image priority src={imageUrl as any} width={1000} height={1000} alt={image?.alt || ''} />
       </div>
@@ -43,7 +68,7 @@ const FeatureTwo = ({
             featureItemList.map((item) => <FeatureItem key={item._key} data={item} />)}
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

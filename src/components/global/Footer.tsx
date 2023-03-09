@@ -15,7 +15,7 @@ const Footer = ({data}: {data: FooterPayload}) => {
       ?.width(200)
       ?.url()
   return (
-    <footer className="mx-auto flex flex-col justify-between py-8 px-8 md:flex-row xl:container">
+    <footer className="mx-auto flex flex-col justify-between overflow-y-hidden py-8 px-8 md:flex-row xl:container">
       <div className="mr-0 pb-8 sm:pb-0 md:mr-8">
         {data.image && (
           <Link href={router.locale === 'en' ? '/' : '/sv'}>

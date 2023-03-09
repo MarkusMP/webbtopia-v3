@@ -332,3 +332,10 @@ export interface IFeatureCaseStudyListItem {
   description?: string
   _key?: string
 }
+
+export interface ICta {
+  title?: string
+  description?: string
+  btnText?: string
+  link?: {slug?: string}
+}

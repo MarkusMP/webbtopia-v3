@@ -3,7 +3,7 @@ import {Head, Html, Main, NextScript} from 'next/document'
 export default function Document() {
   return (
     <Html>
-      <Head></Head>
+      <Head />
       <body className="bg-background bg-[url(/images/dots.svg)] bg-repeat text-dark">
         <Main />
         <NextScript />

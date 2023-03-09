@@ -53,7 +53,7 @@ const Contact = ({
 
   return (
     <section className="mx-auto flex min-h-screen flex-col items-center justify-between px-8 py-12 pt-[80px] lg:flex-row xl:container">
-      <div className="box box-1 relative w-full pt-6 lg:w-5/12 lg:pr-4 lg:pt-0">
+      <div className="relative w-full pt-6 lg:w-5/12 lg:pr-4 lg:pt-0">
         <h3 className="pb-3 tracking-widest text-primary">{subTitle && subTitle}</h3>
         <h2 className="text-2xl font-semibold tracking-wider text-dark sm:text-4xl">
           {title && title}
@@ -81,7 +81,7 @@ const Contact = ({
           </div>
         </div>
       </div>
-      <div className="box box-2 w-full lg:w-6/12 lg:pl-4">
+      <div className="w-full lg:w-6/12 lg:pl-4">
         <form className="mb-6 rounded-lg bg-white p-4 shadow md:p-12" onSubmit={handleSubmit}>
           <div className="flex w-full flex-col pb-6 sm:flex-row">
             <div className="flex w-full flex-col pb-6 pr-2 sm:w-1/2 sm:pb-0">

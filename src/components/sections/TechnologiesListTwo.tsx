@@ -1,5 +1,7 @@
+import {motion, useAnimation} from 'framer-motion'
 import Link from 'next/link'
 import React, {useEffect, useState} from 'react'
+import {useInView} from 'react-intersection-observer'
 
 import {ITechnologiesListItem, ITechnologiesListTwo} from '../../page/types'
 import TechnologiesListItem from '../shared/TechnologiesListItem'
@@ -7,6 +9,9 @@ import TechnologiesListItem from '../shared/TechnologiesListItem'
 const TechnologiesListTwo = ({description, techListTwo, title}: ITechnologiesListTwo) => {
   const [name, setName] = useState('')
   const [data, setData] = useState<ITechnologiesListItem>()
+  const controls = useAnimation()
+  const {ref, inView} = useInView()
+  const [hasAnimated, setHasAnimated] = useState(false)
 
   useEffect(() => {
     if (!name && techListTwo && techListTwo[0].description) {
@@ -20,11 +25,32 @@ const TechnologiesListTwo = ({description, techListTwo, title}: ITechnologiesLis
     }
   }, [name, techListTwo])
 
+  useEffect(() => {
+    if (inView && !hasAnimated) {
+      controls.start({
+        y: 0,
+        opacity: 1,
+        transition: {
+          duration: 0.8,
+        },
+      })
+      setHasAnimated(true)
+    }
+    if (!inView && !hasAnimated) {
+      controls.start({y: 30, opacity: 0})
+    }
+  }, [controls, inView, hasAnimated])
+
   const handleChangeName = (name: string) => {
     setName(name)
   }
   return (
-    <section className="mx-auto flex flex-col items-center justify-between px-8 py-12 xl:container">
+    <motion.section
+      animate={controls}
+      layout="position"
+      ref={ref}
+      className="mx-auto flex flex-col items-center justify-between px-8 py-12 xl:container"
+    >
       <h2 className="mx-auto max-w-md text-center text-2xl font-semibold tracking-wider sm:text-4xl">
         {title && title}
       </h2>
@@ -54,7 +80,7 @@ const TechnologiesListTwo = ({description, techListTwo, title}: ITechnologiesLis
           </Link>
         )}
       </div>
-    </section>
+    </motion.section>
   )
 }
 

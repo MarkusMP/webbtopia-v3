@@ -65,7 +65,7 @@ const Header = ({data}: {data: HeaderPayload}) => {
       }
     >
       <nav className="relative mx-auto flex h-full items-center justify-between px-8 xl:container">
-        <div className="mr-8 xl:mr-0">
+        <div className="mr-2 xl:mr-0">
           <Link href={router.locale === 'en' ? '/' : '/sv'}>
             <Image src={imageUrl as any} width={200} height={50} alt={data.image?.alt || ''} />
           </Link>

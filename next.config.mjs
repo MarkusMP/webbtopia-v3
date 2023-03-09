@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
+import withBundleAnalyzer from '@next/bundle-analyzer'
 import sanityClient from '@sanity/client'
 import {withPlausibleProxy} from 'next-plausible'
+
+const bund = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})
 
 const client = sanityClient({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
@@ -20,6 +25,8 @@ async function fetchSanityRedirects() {
       locale: false,
     }
   })
+
+  console.log(redirects)
 
   return redirects
 }
@@ -68,4 +75,4 @@ const config = {
   reactStrictMode: true,
 }
 
-export default withPlausibleProxy()(config)
+export default withPlausibleProxy()(bund(config))

@@ -26,7 +26,7 @@ const DropDown = ({
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}
     >
-      <button className="blinker  flex items-center text-secondary transition-colors hover:text-primary">
+      <button className="blinker flex items-center text-secondary transition-colors hover:text-primary">
         {item.title}
         <BsChevronDown className="ml-2 text-primary" />
       </button>
@@ -53,7 +53,7 @@ const DropDown = ({
                 </div>
                 <div className="lg:pt-4">
                   {item.dropDownMenuItems?.map((item: HeaderDropDownMenuItemsPayload) => (
-                    <li key={item._id} className="py-2">
+                    <li key={item._id} className="pt-2">
                       <Link
                         href={`/${item.slug}`}
                         className="text-gray transition-colors hover:text-primary"

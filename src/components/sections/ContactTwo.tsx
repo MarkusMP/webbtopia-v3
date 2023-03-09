@@ -1,8 +1,10 @@
 import 'react-toastify/dist/ReactToastify.css'
 
+import {motion, useAnimation} from 'framer-motion'
 import Image from 'next/image'
 import {useRouter} from 'next/router'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import {useInView} from 'react-intersection-observer'
 import {toast, ToastContainer} from 'react-toastify'
 
 import {IContact} from '../../page/types'
@@ -24,6 +26,24 @@ const Contact = ({
   const [emailState, setEmailState] = useState('')
   const [message, setMessage] = useState('')
   const router = useRouter()
+  const controls = useAnimation()
+  const {ref, inView} = useInView()
+  const [hasAnimated, setHasAnimated] = useState(false)
+  useEffect(() => {
+    if (inView && !hasAnimated) {
+      controls.start({
+        y: 0,
+        opacity: 1,
+        transition: {
+          duration: 0.8,
+        },
+      })
+      setHasAnimated(true)
+    }
+    if (!inView && !hasAnimated) {
+      controls.start({y: 30, opacity: 0})
+    }
+  }, [controls, inView, hasAnimated])
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
@@ -53,7 +73,12 @@ const Contact = ({
       ?.url()
 
   return (
-    <section className="mx-auto flex flex-col items-center justify-between px-8 py-12 lg:flex-row xl:container">
+    <motion.section
+      animate={controls}
+      ref={ref}
+      layout="position"
+      className="mx-auto flex flex-col items-center justify-between px-8 py-12 lg:flex-row xl:container"
+    >
       <div className="relative w-full pt-6 lg:w-5/12 lg:pr-4 lg:pt-0">
         <h3 className="pb-3 tracking-widest text-primary">{subTitle && subTitle}</h3>
         <h2 className="text-2xl font-semibold tracking-wider text-dark sm:text-4xl">
@@ -139,7 +164,7 @@ const Contact = ({
         </p>
       </div>
       <ToastContainer />
-    </section>
+    </motion.section>
   )
 }
 

@@ -23,6 +23,7 @@ module.exports = {
       gray: '#585858',
       light_gray: '#E6E6E6',
     },
+
     screens: {
       xs: '360px',
       sm: '640px',

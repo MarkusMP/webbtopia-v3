@@ -1,17 +1,40 @@
+import {motion, useAnimation} from 'framer-motion'
 import Link from 'next/link'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import {useInView} from 'react-intersection-observer'
 
 import {IWorkList} from '../../page/types'
 import WorkItem from '../shared/WorkItem'
 
 const WorkList = ({descriptionTwo, btnText, description, link, title, workItemList}: IWorkList) => {
+  const controls = useAnimation()
+  const {ref, inView} = useInView()
+  const [hasAnimated, setHasAnimated] = useState(false)
+  useEffect(() => {
+    if (inView && !hasAnimated) {
+      controls.start({
+        y: 0,
+        opacity: 1,
+        transition: {
+          duration: 0.8,
+        },
+      })
+      setHasAnimated(true)
+    }
+    if (!inView && !hasAnimated) {
+      controls.start({y: 30, opacity: 0})
+    }
+  }, [controls, inView, hasAnimated])
+
   return (
-    <section className="mx-auto flex items-center px-8 py-12 xl:container">
-      <div className="flex flex-col lg:flex-row">
-        <div className="w-full pb-8 lg:w-2/4 lg:pr-4 2xl:w-3/4 ">
-          <h2 className="text-4xl font-semibold tracking-wider text-dark">{title && title}</h2>
+    <section ref={ref} className="mx-auto my-12 flex items-center px-8 xl:container">
+      <motion.div animate={controls} className="flex flex-col lg:flex-row">
+        <div className="w-full pb-8 lg:w-2/4 lg:pr-4 2xl:w-3/4">
+          <h2 className="text-2xl font-semibold tracking-wider text-dark sm:text-4xl">
+            {title && title}
+          </h2>
           <p className="pt-6 text-gray">{description && description}</p>
-          <p className="pt-6 pb-6 text-gray">{descriptionTwo && descriptionTwo}</p>
+          <p className="pt-3 pb-6 text-gray">{descriptionTwo && descriptionTwo}</p>
 
           {btnText && (
             <Link
@@ -22,10 +45,11 @@ const WorkList = ({descriptionTwo, btnText, description, link, title, workItemLi
             </Link>
           )}
         </div>
+
         <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:pl-4">
           {workItemList && workItemList.map((item: any) => <WorkItem key={item._id} data={item} />)}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }
